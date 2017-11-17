@@ -39,7 +39,7 @@ SINGLE MOVIE VIEW
 - Movie Title
 - Movie Description
 - Movie Runtime
-- # of LIkes 
+- Number of Likes 
 - Comments made by all users
 - Option to add a comment 
 - Option to Like a movie 
