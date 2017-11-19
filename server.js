@@ -28,10 +28,10 @@ app.listen(PORT, function(){
 	console.log(`Listening on ${PORT}, knock em dead!`)
 })
 
-////PS - begin running the middlewares 
+////PS - begin running the middlewares
 //PS - start the logger
 app.use(logger('dev'));
-//PS - set up the path to the public folder 
+//PS - set up the path to the public folder
 app.use(express.static(path.join(__dirname,'public')));
 //PS - let the bodies parse the floor
 app.use(bodyParser.json());
@@ -49,3 +49,23 @@ app.use(session({
 }));
 app.use(passport.initialize())
 app.use(passport.session())
+
+// AF - set routes to variable
+const flixyRoutes = require('./routes/flixy-routes');
+
+// AF - will need to set up app.use to the API route here
+
+//AF - error catcher
+app.use('*', (req,res) => {
+  res.status(404).send('Not found');
+});
+
+
+
+
+
+
+
+
+
+
