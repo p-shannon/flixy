@@ -90,5 +90,9 @@ STYLE GUIDE:
 - comments written before functions and begin with initials ex. //AF: send information to database
 - database tables all lowercase
 
+
 test change!
+
+-ARISA has TO DELETE THIS!
+
 
