@@ -8,7 +8,7 @@ const options = {
 const pgp = require('pg-promise')(options);
 
 function setDatabase() {
-  if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV') {
+  if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
     return pgp({
       host: 'localhost',
       database: 'flixy_db',
