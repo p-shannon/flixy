@@ -105,11 +105,8 @@ AF: making another change
 
 hello
 ```js
-function destroyThePlanet(){
-	window.close()
-	terminal.open()
-	run(sudo rm rf- ~)
-	return "YOU LOSE!"
+function add (a,b) {
+	return a + b
 }
 ```
 
