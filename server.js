@@ -50,15 +50,16 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+//AF - will need to set up app.use to the API route here
+//PS - movie router as written by LN
 const movieRoutes = require('./routes/movie-routes');
 app.use('/movies', movieRoutes);
 
-// AF - will need to set up app.use to the API route here
-
-
+//PS - comment router
+const commentRoutes = require('./routes/comment-routes');
+app.use('/comments', commentRoutes);
 
 //AF - error catcher
-
 app.use('*', (req,res) => {
   res.status(404).send('Not found');
 });
