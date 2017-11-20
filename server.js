@@ -50,12 +50,15 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// AF - set routes to variable
-const flixyRoutes = require('./routes/flixy-routes');
+const movieRoutes = require('./routes/movie-routes');
+app.use('/movies', movieRoutes);
 
 // AF - will need to set up app.use to the API route here
 
+
+
 //AF - error catcher
+
 app.use('*', (req,res) => {
   res.status(404).send('Not found');
 });
