@@ -29,7 +29,7 @@ movieController.show = (req, res) => {
     res.status(200).json({
       message: 'ok',
       data: {
-        movies: movies,
+        movies: movie,
       }
     });
   }).catch(err => {
