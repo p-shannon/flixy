@@ -6,6 +6,20 @@ const User = require('../models/User');
 //LN-initializing userscontroller as an empty object
 const usersController = {};
 
+
+//SH, AF, LN - finding all users in users to display on main
+usersController.users = (req, res) => {
+  User.findAll()
+  .then(users => {
+    res.status(200).json({
+      message: 'ok',
+      data: {
+        users: users,
+      }
+    })
+  })
+}
+
 //LN-finding all movies added by a user and all comments added by a user and rendering it on users/users-home
 usersController.index = (req, res) => {
   User.findUserMovies(req.user.id)
@@ -22,6 +36,7 @@ usersController.index = (req, res) => {
       })
   })
 }
+
 
 //LN-creating a user for registration
 usersController.create = (req, res) => {

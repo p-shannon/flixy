@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Movie from './components/Movie';
 import Splash from './components/Splash';
+import Main from './components/Main'
 
 class App extends Component {
   constructor() {
@@ -173,7 +174,7 @@ render() {
       <div className="App">
         <Route exact path='/' render={() => (
         this.state.auth
-          ? <Redirect to='/movies' />
+          ? <Redirect to='/main' />
           : <Splash handleLoginSubmit={this.handleLoginSubmit}
           handleRegisterSubmit={this.handleRegisterSubmit} getRegisterForm={this.getRegisterForm} getLoginForm={this.getLoginForm}
           currentPage={this.state.currentPage}/>
@@ -192,6 +193,11 @@ render() {
         !this.state.auth
           ? <Redirect to='/' />
           : <Movie logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
+        )} />
+        <Route exact path='/main' render={() => (
+        !this.state.auth
+        ? <Redirect to='/' />
+        : <Main logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
         )} />
       </div>
      </Router>

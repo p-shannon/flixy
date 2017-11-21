@@ -4,6 +4,11 @@ const db = require('../db/config');
 //LN-initializing empty object of User
 const User = {};
 
+//LN-finding all users
+User.findAll = () => {
+  return db.query(`SELECT * FROM users`)
+};
+
 //LN-finding one user
 User.findByUserName = userName => {
   return db.oneOrNone(`
