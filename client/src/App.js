@@ -23,12 +23,15 @@ class App extends Component {
     rated: "",
     plot: "",
     ratings: "",
+    currentPage: null,
   }
   this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
   this.logout = this.logout.bind(this);
   this.fetchMovie = this.fetchMovie.bind(this);
   this.postMovie = this.postMovie.bind(this);
+  this.getRegisterForm = this.getRegisterForm.bind(this)
+  this.getLoginForm = this.getLoginForm.bind(this)
   }
 
 //LN-call to the backend to prevent from logging out the user upon refresh
@@ -147,6 +150,21 @@ logout() {
     })
   }
 
+//LN,SH,AF adding in register and login forms to conditionally render w buttons
+  getRegisterForm() {
+    console.log('getregisterformworking')
+    this.setState ({
+      currentPage: 'register',
+    })
+  }
+
+  getLoginForm() {
+    console.log('getloginformworking')
+    this.setState ({
+      currentPage: 'login',
+    })
+  }
+
 //AF - currently returning the 'add form', though we should refactor into indiv. component
 //LN - adding in route paths to auth components with props
 render() {
@@ -157,7 +175,8 @@ render() {
         this.state.auth
           ? <Redirect to='/movies' />
           : <Splash handleLoginSubmit={this.handleLoginSubmit}
-          handleRegisterSubmit={this.handleRegisterSubmit} />
+          handleRegisterSubmit={this.handleRegisterSubmit} getRegisterForm={this.getRegisterForm} getLoginForm={this.getLoginForm}
+          currentPage={this.state.currentPage}/>
           ) }/>
         <Route exact path='/login' render={() => (
         this.state.auth
@@ -171,7 +190,7 @@ render() {
         )} />
         <Route exact path='/movies' render={() => (
         !this.state.auth
-          ? <Redirect to='/login' />
+          ? <Redirect to='/' />
           : <Movie logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
         )} />
       </div>
