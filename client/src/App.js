@@ -1,27 +1,102 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
-//AF - setting up stateful class
+import Login from './components/Login';
+import Register from './components/Register';
+import Landing from './components/Landing';
+import Movie from './components/Movie';
+
 class App extends Component {
   constructor() {
-    super();
-    this.state = {
-      dataLoaded: false,
-      title: "",
-      year: 0,
-      poster: "",
-      director: "",
-      genre: "",
-      runtime: "",
-      rated: "",
-      plot: "",
-      ratings: "",
-    }
-    this.fetchMovie = this.fetchMovie.bind(this)
-    this.postMovie = this.postMovie.bind(this)
+  super();
+  this.state = {
+    auth: false,
+    user: null,
+    //AF - setting up stateful class
+    dataLoaded: false,
+    title: "",
+    year: 0,
+    poster: "",
+    director: "",
+    genre: "",
+    runtime: "",
+    rated: "",
+    plot: "",
+    ratings: "",
+  }
+  this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+  this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
+  this.logout = this.logout.bind(this);
+  this.fetchMovie = this.fetchMovie.bind(this);
+  this.postMovie = this.postMovie.bind(this);
   }
 
-  //AF - grabbing movie data from external database
+//LN-call to the backend to prevent from logging out the user upon refresh
+  componentDidMount() {
+    fetch('/auth/verify', { credentials: 'include'}).then(res => res.json()).then(res => {
+      this.setState({
+        auth: res.auth,
+        user: res.data.user,
+      })
+    }).catch(err => console.log(err));
+  }
+
+//LN-posting user register submit 
+handleRegisterSubmit(e, data) {
+    e.preventDefault();
+    console.log(data);
+    fetch('/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(data),
+    }).then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({
+          auth: res.auth,
+          user: res.data.user,
+        })
+      }).catch(err => console.log(err));
+    }
+
+  //LN-login submit, posting user login info
+handleLoginSubmit(e, data) {
+  e.preventDefault();
+  fetch('/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  credentials: 'include',
+  body: JSON.stringify(data),
+  }).then(res => res.json())
+    .then(res => {
+      console.log(res);
+      this.setState({
+        auth: res.auth,
+        user: res.data.user,
+      })
+    }).catch(err => console.log(err));
+}
+
+//LN- logout function
+logout() {
+  fetch('/auth/logout', {
+    credentials: 'include',
+  }).then(res => res.json())
+    .then(res => {
+      this.setState({
+        auth: res.auth,
+        user: res.data.user,
+      })
+    }).catch(err => console.log(err))
+}
+
+//AF - grabbing movie data from external database
   fetchMovie (e) {
     e.preventDefault();
     fetch(`http://www.omdbapi.com/?apikey=229c8971&t=${e.target.title.value}`, {
@@ -73,17 +148,37 @@ class App extends Component {
     })
   }
 
-  //AF - currently returning the 'add form', though we should refactor into indiv. component
-  render() {
+//AF - currently returning the 'add form', though we should refactor into indiv. component
+//LN - adding in route paths to auth components with props
+render() {
     return (
+      <Router>
       <div className="App">
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/login' render={() => (
+        this.state.auth
+          ? <Redirect to='/movies' />
+          : <Login handleLoginSubmit={this.handleLoginSubmit} />
+        )} />
+        <Route exact path='/register' render={() => (
+        this.state.auth
+        ? <Redirect to='/movies' />
+        : <Register handleRegisterSubmit={this.handleRegisterSubmit} />
+        )} />
+        <Route exact path='/movies' render={() => (
+        !this.state.auth
+          ? <Redirect to='/login' />
+          : < Movie logout={this.logout} />
+        )} />
         <form className="input" onSubmit={this.fetchMovie}>
           <input type="text" name="title" placeholder="movie title"/>
           <input type="submit" value="submit"/>
         </form>
       </div>
-    );
+     </Router>
+      )
   }
 }
 
 export default App;
+

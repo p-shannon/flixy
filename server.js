@@ -43,17 +43,22 @@ app.use(methodOverride('_method'));
 app.use(cookieParser());
 //PS - start the auth session
 app.use(session({
+  key: process.env.SECRET_KEY,
 	secret: process.env.SECRET_KEY,
 	resave: false,
-	saveUninitized: true
+	saveUninitialized: true,
 }));
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 //AF - will need to set up app.use to the API route here
 //PS - movie router as written by LN
 const movieRoutes = require('./routes/movie-routes');
 app.use('/movies', movieRoutes);
+const authRoutes = require('./routes/auth-routes');
+app.use('/auth', authRoutes);
+const userRoutes = require('./routes/user-routes');
+app.use('/user', userRoutes);
 
 //PS - comment router
 const commentRoutes = require('./routes/comment-routes');
