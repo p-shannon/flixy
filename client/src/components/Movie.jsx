@@ -1,16 +1,23 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
 
 const Movie = (props) => {
   return (
-    <header>
+    <div className="container">
+      <div className="logout">
       <nav>
         <ul>
           <li><button className="logout" onClick={props.logout}>Logout</button></li>
         </ul>
       </nav>
-    </header>
+      </div>
+      <div className="moviesubmit">
+       <form className="input" onSubmit={props.fetchMovie}>
+          <input type="text" name="title" placeholder="movie title"/>
+          <input type="submit" value="submit"/>
+      </form>
+      </div>
+    </div>
     )
   }
 

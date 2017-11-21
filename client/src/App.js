@@ -4,8 +4,8 @@ import './App.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import Landing from './components/Landing';
 import Movie from './components/Movie';
+import Splash from './components/Splash';
 
 class App extends Component {
   constructor() {
@@ -13,7 +13,6 @@ class App extends Component {
   this.state = {
     auth: false,
     user: null,
-    //AF - setting up stateful class
     dataLoaded: false,
     title: "",
     year: 0,
@@ -42,7 +41,7 @@ class App extends Component {
     }).catch(err => console.log(err));
   }
 
-//LN-posting user register submit 
+//LN-posting user register submit
 handleRegisterSubmit(e, data) {
     e.preventDefault();
     console.log(data);
@@ -154,7 +153,12 @@ render() {
     return (
       <Router>
       <div className="App">
-        <Route exact path='/' component={Landing} />
+        <Route exact path='/' render={() => (
+        this.state.auth
+          ? <Redirect to='/movies' />
+          : <Splash handleLoginSubmit={this.handleLoginSubmit}
+          handleRegisterSubmit={this.handleRegisterSubmit} />
+          ) }/>
         <Route exact path='/login' render={() => (
         this.state.auth
           ? <Redirect to='/movies' />
@@ -168,12 +172,8 @@ render() {
         <Route exact path='/movies' render={() => (
         !this.state.auth
           ? <Redirect to='/login' />
-          : < Movie logout={this.logout} />
+          : <Movie logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
         )} />
-        <form className="input" onSubmit={this.fetchMovie}>
-          <input type="text" name="title" placeholder="movie title"/>
-          <input type="submit" value="submit"/>
-        </form>
       </div>
      </Router>
       )
