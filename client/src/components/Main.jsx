@@ -71,6 +71,7 @@ componentDidMount() {
     console.log(this.state)
     fetch('/movies/', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
