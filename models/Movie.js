@@ -23,7 +23,7 @@ Movie.findById = id => {
 Movie.create = movie => {
   return db.one(`
     INSERT INTO movies (
-      title, year, poster, director, genre, runtime, rated, plot, ratings)
+      title, year, poster, director, genre, runtime, rated, plot, ratings, user_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     RETURNING *`, [movie.title, movie.year, movie.poster, movie.director, movie.genre, movie.runtime, movie.rated, movie.plot, movie.ratings,movie.user]);
 }
