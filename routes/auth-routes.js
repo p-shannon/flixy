@@ -1,4 +1,4 @@
-//LN-requiring express
+ //LN-requiring express
 const express = require('express');
 //LN-requiring express router
 const authRouter = express.Router();
@@ -27,7 +27,13 @@ authRouter.get('/verify', (req, res) => {
     message: 'ok',
     auth: true,
     data: {
-      user: req.user,
+      //PS - for security reasons, gunna omit the password digest from this return
+      user: {
+        id: req.user.id,
+        username: req.user.username,
+        firstname: req.user.firstname,
+        lastname: req.user.lastname
+      }
     }
   });
   else return res.status(401).json({

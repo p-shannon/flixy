@@ -51,6 +51,7 @@ movieController.create = (req, res, next) => {
     rated:    req.body.rated,
     plot:     req.body.plot,
     ratings:  req.body.ratings,
+    user:     req.user.id
   })
   .then(movie => {
     res.status(201).json({

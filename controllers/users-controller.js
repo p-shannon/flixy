@@ -55,7 +55,12 @@ usersController.create = (req, res) => {
         message: 'user added',
         auth: true,
         data: {
-          user,
+          user: {
+            //PS - Removes password digest from retun.
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            username: req.body.username,
+          }
         }
       })
     });

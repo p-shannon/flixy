@@ -34,10 +34,10 @@ Comment.findById = id => {
 //PS - create a single comment
 Comment.create = comment => {
 	return db.one(`INSERT INTO comments 
-		(body,timestamp,movie_id) 
+		(body,timestamp,movie_id,user_id) 
 		VALUES($1,$2,$3) 
 		RETURNING *`,
-		[comment.body, comment.timestamp, comment.movie_id])
+		[comment.body, comment.timestamp, comment.movie_id,comment.user_id])
 }
 
 //PS - edit a single comment

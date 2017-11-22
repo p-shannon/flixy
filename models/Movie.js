@@ -5,8 +5,11 @@ const db = require('../db/config');
 const Movie = {};
 
 //LN-getting all movies from flixy db
+//PS-And attaches the user that added the movie to the query
 Movie.findAll = () => {
-  return db.query(`SELECT * FROM movies`)
+  return db.query(`SELECT 
+    movies.*, users.id, users.username, users.firstname, users.lastname
+    FROM movies join users on (movies.user_id = users.id)`)
 }
 
 //AF-grab movies by ID
@@ -21,8 +24,8 @@ Movie.create = movie => {
   return db.one(`
     INSERT INTO movies (
       title, year, poster, director, genre, runtime, rated, plot, ratings)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    RETURNING *`, [movie.title, movie.year, movie.poster, movie.director, movie.genre, movie.runtime, movie.rated, movie.plot, movie.ratings]);
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING *`, [movie.title, movie.year, movie.poster, movie.director, movie.genre, movie.runtime, movie.rated, movie.plot, movie.ratings,movie.user]);
 }
 
 //AF-update movie based on its ID
