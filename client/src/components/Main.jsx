@@ -61,7 +61,6 @@ componentDidMount() {
     }).then(() => {
     console.log(this.state.title)
     this.postMovie()
-    this.getMovies()
     })
   }
 
@@ -86,6 +85,8 @@ componentDidMount() {
         plot:     this.state.plot,
         ratings:  this.state.ratings,
       })
+    }).then(() => {
+      this.getMovies()
     })
   }
 
