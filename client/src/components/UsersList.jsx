@@ -3,13 +3,11 @@ import React from 'react';
 
 const UsersList = (props) => {
   return (
-    <div className="userslist">
-      <ul>
+    <div className="userslistcontainer">
       {props.usersList.map(user => {
       return  (
-        <li key={user.id}>{user.username}</li>
+        <div className="userslist" key={user.id}>{user.username}</div>
         )})}
-      </ul>
     </div>
     )
 }

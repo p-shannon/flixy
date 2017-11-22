@@ -4,7 +4,7 @@ import './App.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import Movie from './components/Movie';
+import AddMovie from './components/AddMovie';
 import Splash from './components/Splash';
 import Main from './components/Main'
 
@@ -14,23 +14,10 @@ class App extends Component {
   this.state = {
     auth: false,
     user: null,
-    dataLoaded: false,
-    title: "",
-    year: 0,
-    poster: "",
-    director: "",
-    genre: "",
-    runtime: "",
-    rated: "",
-    plot: "",
-    ratings: "",
-    currentPage: null,
   }
   this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
   this.logout = this.logout.bind(this);
-  this.fetchMovie = this.fetchMovie.bind(this);
-  this.postMovie = this.postMovie.bind(this);
   this.getRegisterForm = this.getRegisterForm.bind(this)
   this.getLoginForm = this.getLoginForm.bind(this)
   }
@@ -99,58 +86,6 @@ logout() {
     }).catch(err => console.log(err))
 }
 
-//AF - grabbing movie data from external database
-  fetchMovie (e) {
-    e.preventDefault();
-    fetch(`http://www.omdbapi.com/?apikey=229c8971&t=${e.target.title.value}`, {
-      method: 'GET',
-      headers: {},
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res)
-      console.log(`title: ${res.Title}`)
-      this.setState({
-        dataLoaded: true,
-        title: res.Title,
-        year: res.Year,
-        poster: res.Poster,
-        director: res.Director,
-        genre: res.Genre,
-        runtime: res.Runtime,
-        rated: res.Rated,
-        plot: res.Plot,
-        ratings: res.Ratings,
-      })
-    }).then(() => {
-    console.log(this.state.title)
-    this.postMovie()
-    })
-  }
-
-  // AF - adding data to local database through POST request
-  postMovie() {
-    console.log('posted')
-    console.log(this.state)
-    fetch('/movies/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title:    this.state.title,
-        year:     this.state.year,
-        poster:   this.state.poster,
-        director: this.state.director,
-        genre:    this.state.genre,
-        runtime:  this.state.runtime,
-        rated:    this.state.rated,
-        plot:     this.state.plot,
-        ratings:  this.state.ratings,
-      })
-    })
-  }
-
 //LN,SH,AF adding in register and login forms to conditionally render w buttons
   getRegisterForm() {
     console.log('getregisterformworking')
@@ -192,12 +127,12 @@ render() {
         <Route exact path='/movies' render={() => (
         !this.state.auth
           ? <Redirect to='/' />
-          : <Movie logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
+          : <AddMovie logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
         )} />
         <Route exact path='/main' render={() => (
         !this.state.auth
         ? <Redirect to='/' />
-        : <Main logout={this.logout} fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
+        : <Main logout={this.logout} />
         )} />
       </div>
      </Router>
