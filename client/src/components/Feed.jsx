@@ -6,6 +6,7 @@ const Feed = (props) => {
     {props.movieFeed.map(movie => {
       return (
         <div className="moviecontainer" key={movie.id}>
+        <h1>{movie.username}</h1>
         <img src={movie.poster} />
         <p>{movie.title} ({movie.year})</p>
         </div>)

@@ -60,6 +60,7 @@ componentDidMount() {
       })
     }).then(() => {
     console.log(this.state.title)
+    document.querySelector(".input").reset()
     this.postMovie()
     })
   }
