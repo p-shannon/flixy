@@ -38,6 +38,7 @@ componentDidMount() {
 //AF - grabbing movie data from external database
   fetchMovie (e) {
     e.preventDefault();
+    //PS - Note: We'll eventually have to hide this api key somehow...
     fetch(`http://www.omdbapi.com/?apikey=229c8971&t=${e.target.title.value}`, {
       method: 'GET',
       headers: {},
@@ -69,7 +70,7 @@ componentDidMount() {
   postMovie() {
     console.log('posted')
     console.log(this.state)
-    fetch('/movies/', {
+    fetch('/api/movies/', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -92,7 +93,7 @@ componentDidMount() {
   }
 
 getUsers() {
-  fetch('/user/list', {
+  fetch('/api/users/', {
     method: 'GET',
     headers: {},
   })
@@ -107,7 +108,7 @@ getUsers() {
 }
 
 getMovies() {
-  fetch('/movies/', {
+  fetch('/api/movies/', {
     method: 'GET',
     headers: {},
   })

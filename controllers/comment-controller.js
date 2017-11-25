@@ -4,23 +4,6 @@ const Comment = require('../models/Comment')
 //PS - Initialize the object
 const commentController = {}
 
-//PS - Index the comments of a certain movie
-commentController.movieIndex = (req,res) => {
-	Comment.findAllByMovieId(req.params.movie_id)
-	.then(data => {
-		res.status(200).json({
-			message: 'ok',
-			data: data,
-		})
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			error: err,
-		})
-	})
-}
-
 //PS - Show a single comment (Don't know why we'd need this)
 commentController.show = (req,res) => {
 	Comment.findById(req.params.id)
@@ -43,7 +26,7 @@ commentController.create = (req,res) => {
 	Comment.create({
 		body: req.body.body, /*PS - FORGIVE CODE GOD!!!!1*/
 		timestamp: Date.now(),
-		movie_id: req.params.movie_id,
+		movie_id: req.params.id,
 		user_id: req.user.id,
 	}).then(data => {
 		res.status(200).json({
@@ -97,23 +80,6 @@ commentController.edit = (req,res) => {
 			error: err,
 		})
 	})
-	/* ORIGINAL WORKING!!!1!!
-	Comment.edit({
-		body: req.body.body,
-		id: req.params.id
-	}).then(data => {
-		res.status(200).json({
-			message: 'Edited successfully',
-			data: data,
-		})
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			error: err,
-		})
-	})
-	*/
 }
 
 //PS - remove a single comment if the owner wants it gone...
@@ -151,21 +117,6 @@ commentController.delete = (req,res) => {
 			error: err,
 		})
 	})
-
-	/*
-	Comment.delete(req.params.id)
-	.then(() => {
-		res.status(200).json({
-			message: 'Deleted successfully',
-		})
-	})
-	.catch(err => {
-		console.log(err);
-		res.status(500).json({
-			error: err,
-		})
-	})
-	*/
 }
 
 //PS - KILL ALL THE COMMENTS!!!

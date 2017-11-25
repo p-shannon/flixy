@@ -52,17 +52,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //AF - will need to set up app.use to the API route here
-//PS - movie router as written by LN
-const movieRoutes = require('./routes/movie-routes');
-app.use('/movies', movieRoutes);
+
+////PS - API route
+//PS - grab it...
+const apiRoutes = require('./routes/api-routes');
+//PS - use it...
+app.use('/api',apiRoutes);
+
+////PS - Auth route
 const authRoutes = require('./routes/auth-routes');
 app.use('/auth', authRoutes);
-const userRoutes = require('./routes/user-routes');
-app.use('/user', userRoutes);
-
-//PS - comment router
-const commentRoutes = require('./routes/comment-routes');
-app.use('/comments', commentRoutes);
 
 //AF - error catcher
 app.use('*', (req,res) => {

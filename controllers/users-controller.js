@@ -8,7 +8,8 @@ const usersController = {};
 
 
 //SH, AF, LN - finding all users in users to display on main
-usersController.users = (req, res) => {
+//PS - Changing the name of this from 'users' to 'index' as we want an index of users.
+usersController.index = (req, res) => {
   User.findAll()
   .then(users => {
     res.status(200).json({
@@ -18,25 +19,30 @@ usersController.users = (req, res) => {
       }
     })
   })
-}
-
-//LN-finding all movies added by a user and all comments added by a user and rendering it on users/users-home
-usersController.index = (req, res) => {
-  User.findUserMovies(req.user.id)
-  .then(movies => {
-      User.findUserComments(req.user.id)
-      .then(comments => {
-        res.status(200).json({
-          message: 'ok',
-          data: {
-          movies: movies,
-          comments: comments,
-          }
-        })
-      })
+  .catch(err => {
+    res.status(500).json({
+      message: "Not okay",
+      error: err
+    })
   })
 }
 
+//PS - for grabbing information about a particular user including their posts and stuffs.
+usersController.showAllByUser = (req,res) => {
+  User.showAllByUser(req.params.id)
+  .then(data => {
+    res.status(200).json({
+      message: "User's postings retrieved successfully!",
+      data: data,
+    })
+  })
+  .catch(err => {
+    res.status(500).json({
+      message: "Not okay",
+      error: err,
+    })
+  })
+}
 
 //LN-creating a user for registration
 usersController.create = (req, res) => {
@@ -70,7 +76,7 @@ usersController.create = (req, res) => {
   })
 }
 
-
+//PS - Big thank you to my team for laying the groundwork to allow me to go hard on this back-end, wouldn't be able to do this without them.
 
 //LN-exporting userscontroller
 module.exports = usersController;

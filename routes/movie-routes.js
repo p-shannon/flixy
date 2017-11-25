@@ -2,24 +2,30 @@
 const express = require('express');
 
 //LN-creating router instance
-const movieRouter = express.Router();
+const movieRoutes = express.Router();
 //LN-requiring movie-controller
 const movieController = require('../controllers/movie-controller');
+//PS - and the comment controller (for posting)
+const commentController = require('../controllers/comment-controller')
 
 //LN-creating get request on root route that returns findall model method
-movieRouter.get('/', movieController.index);
+movieRoutes.get('/', movieController.index);
 
 //AF-get route for movies by ID
-movieRouter.get('/:id', movieController.show)
+movieRoutes.get('/:id', movieController.show)
 
 //AF-post route to add a movie to the db
-movieRouter.post('/', movieController.create)
+movieRoutes.post('/', movieController.create)
 
 //AF-put route to update movie by ID
-movieRouter.put('/:id', movieController.update)
+movieRoutes.put('/:id', movieController.update)
 
 //AF-delete route that removes movie from db by ID
-movieRouter.delete('/:id', movieController.delete)
+movieRoutes.delete('/:id', movieController.delete)
 
-//LN-exports movieRouter
-module.exports = movieRouter;
+//PS - route for posting a comment on a movie
+movieRoutes.post('/:id',
+	commentController.create)
+
+//LN-exports movieRoutes
+module.exports = movieRoutes;

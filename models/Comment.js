@@ -5,27 +5,6 @@ const db = require('../db/config')
 //PS - Initialize with an empty object
 const Comment = {};
 
-//PS - grab all comments on a given movie
-Comment.findAllByMovieId = id => {
-	////PS - We're doing a nested query, Thanks Drake for demonstrating nested queries for me
-	//PS - first grab the movie
-	return db.one('select * from movies where id = $1', [id])
-	//PS - Then send it down the next layer...
-	.then(movie => {
-		//PS - grab all comments for the movie...
-		return db.query('select * from comments where movie_id = $1', [id])
-		//PS - Then pass that down to the next layer (movie is still in scope)
-		.then(comments => {
-			//PS - Return the object containing both things
-			return {
-				movie: movie,
-				comments: comments,
-			}
-			//PS - the results are fuckin' gorgeous
-		})
-	})
-}
-
 //PS - grab a single comment
 Comment.findById = id => {
 	return db.one('select * from comments where id = $1',[id])
@@ -35,7 +14,7 @@ Comment.findById = id => {
 Comment.create = comment => {
 	return db.one(`INSERT INTO comments 
 		(body,timestamp,movie_id,user_id) 
-		VALUES($1,$2,$3) 
+		VALUES($1,$2,$3,$4) 
 		RETURNING *`,
 		[comment.body, comment.timestamp, comment.movie_id,comment.user_id])
 }
