@@ -15,6 +15,7 @@ class Main extends Component {
     usersList: null,
     movieFeed: null,
     dataLoaded: false,
+    fetchedMovie: null,
     title: "",
     year: 0,
     poster: "",
@@ -49,6 +50,7 @@ componentDidMount() {
       console.log(`title: ${res.Title}`)
       this.setState({
         dataLoaded: true,
+        fetchedMovie: res,
         title: res.Title,
         year: res.Year,
         poster: res.Poster,
@@ -62,7 +64,6 @@ componentDidMount() {
     }).then(() => {
     console.log(this.state.title)
     document.querySelector(".input").reset()
-    this.postMovie()
     })
   }
 
@@ -89,6 +90,7 @@ componentDidMount() {
       })
     }).then(() => {
       this.getMovies()
+      this.resetPreview()
     })
   }
 
@@ -122,7 +124,13 @@ getMovies() {
   })
 }
 
-
+// AF - this function resets the preview window
+resetPreview() {
+  this.setState({
+    dataLoaded: null,
+    fetchedMovie: null,
+  })
+}
 
   render() {
     return (
@@ -140,7 +148,7 @@ getMovies() {
                 : <p>Loading...</p> }
               </div>
               <div className="addmoviecontainer">
-                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie}/>
+                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>
               </div>
           </div>
       </div>
