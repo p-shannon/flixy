@@ -3,7 +3,7 @@ import UsersList from './UsersList';
 import AddMovie from './AddMovie';
 import Feed from './Feed';
 import Nav from './Nav';
-
+import SingleMovie from './SingleMovie';
 
 
 class Main extends Component {
@@ -14,7 +14,11 @@ class Main extends Component {
     moviesLoaded: false,
     usersList: null,
     movieFeed: null,
+    selectedMovie: {},
+    singleLoaded: false,
     dataLoaded: false,
+    selectedComments: [],
+    selectedRatings: {},
     fetchedMovie: null,
     title: "",
     year: 0,
@@ -29,6 +33,7 @@ class Main extends Component {
     }
     this.fetchMovie = this.fetchMovie.bind(this);
     this.postMovie = this.postMovie.bind(this);
+    this.singleMovie = this.singleMovie.bind(this);
   }
 
 componentDidMount() {
@@ -124,6 +129,23 @@ getMovies() {
   })
 }
 
+singleMovie(id) {
+  fetch(`/api/movies/${id}`, {
+    method: 'GET',
+    headers: {},
+  })
+  .then(res => res.json())
+  .then(res => {
+    this.setState({
+      selectedMovie: res.data.movies.movie,
+      selectedComments: res.data.movies.comments,
+      selectedRatings: JSON.stringify(res.data.movies.movie.ratings),
+      singleLoaded: true,
+      moviesLoaded: false,
+    })
+  })
+}
+
 // AF - this function resets the preview window
 resetPreview() {
   this.setState({
@@ -131,6 +153,7 @@ resetPreview() {
     fetchedMovie: null,
   })
 }
+
 
   render() {
     return (
@@ -144,8 +167,9 @@ resetPreview() {
               </div>
               <div className="moviefeedcontainer">
                 {this.state.moviesLoaded ?
-                <Feed movieFeed={this.state.movieFeed} />
-                : <p>Loading...</p> }
+                <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} />
+                : <SingleMovie selectedMovie={this.state.selectedMovie}
+                selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} /> }
               </div>
               <div className="addmoviecontainer">
                 <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>
