@@ -7,10 +7,10 @@ class SingleMovie extends Component {
 	constructor(props){
 		super(props)
 		//PS - Shenanigans I didn't write goes here
-		console.log(props.selectedMovie)
+		  console.log(props.selectedMovie)
   		console.log(props.selectedComments)
   		console.log(props.selectedRatings)
-  		const ratings = props.selectedRatings[2]
+  		
   		//PS - </shenanigans>
   		//PS - Handle the states for the form submissions
   		this.state = {
@@ -69,7 +69,7 @@ class SingleMovie extends Component {
 	        <h3>Genre: {this.props.selectedMovie.genre}</h3>
 	        <h2>{this.props.selectedMovie.plot}</h2>
 	        <h3>Rated: {this.props.selectedMovie.rated}</h3>
-	        {/*<h3>Reviews: {ratings}</h3>*/}
+	        <h3>Rotten Tomatoes: {props.selectedRatings}</h3>
 	        <div className="commentcontainer">
 	        {this.props.selectedComments.map(comment => {
 	          return (
@@ -86,7 +86,6 @@ class SingleMovie extends Component {
 	    )
 	}
 }
-
 
 export default SingleMovie
 

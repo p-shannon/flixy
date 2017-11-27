@@ -58,7 +58,6 @@ componentDidMount() {
     .then(res => res.json())
     .then(res => {
       console.log(res)
-      console.log(`title: ${res.Title}`)
       this.setState({
         dataLoaded: true,
         fetchedMovie: res,
@@ -70,10 +69,9 @@ componentDidMount() {
         runtime: res.Runtime,
         rated: res.Rated,
         plot: res.Plot,
-        ratings: res.Ratings,
+        ratings: res.Ratings[1].Value,
       })
     }).then(() => {
-    console.log(this.state.title)
     document.querySelector(".input").reset()
     })
   }
@@ -100,7 +98,7 @@ componentDidMount() {
         ratings:  this.state.ratings,
       })
     }).then(() => {
-
+      console.log("here-->" + this.state.ratings)
       {this.state.userPageLoaded === false
       ? this.getMovies()
       : this.getOneUser(this.props.user.id)}
