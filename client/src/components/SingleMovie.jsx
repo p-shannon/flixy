@@ -55,6 +55,7 @@ class SingleMovie extends Component {
 			this.setState({
 				comment: "",
 			})
+			document.querySelector('#newcommentform').reset()
 		})
 	}
 
@@ -76,8 +77,8 @@ class SingleMovie extends Component {
 	            )
 	          })
 	        }
-	        <form onSubmit={(e)=>{this.handleSubmission(e, this.props.selectedMovie.id)}}>
-	        	<textArea placeholder="Write a comment!" onChange={(e)=>{this.handleChanges(e)}} value={this.state.comment}/>
+	        <form id="newcommentform" onSubmit={(e)=>{this.handleSubmission(e, this.props.selectedMovie.id)}}>
+	        	<textarea placeholder="Write a comment!" onChange={(e)=>{this.handleChanges(e)}} value={this.state.comment}/>
 	        	<input type="submit" value="Post!"/>
 	        </form>
 	        </div>
