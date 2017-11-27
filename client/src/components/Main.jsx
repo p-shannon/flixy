@@ -13,6 +13,7 @@ class Main extends Component {
     usersLoaded: false,
     moviesLoaded: false,
     usersList: null,
+    selectedUser: null,
     movieFeed: null,
     selectedMovie: {},
     singleLoaded: false,
@@ -33,6 +34,8 @@ class Main extends Component {
     }
     this.fetchMovie = this.fetchMovie.bind(this);
     this.postMovie = this.postMovie.bind(this);
+    this.getOneUser = this.getOneUser.bind(this);
+    this.resetSelectedUser = this.resetSelectedUser.bind(this);
     this.singleMovie = this.singleMovie.bind(this);
   }
 
@@ -114,6 +117,32 @@ getUsers() {
   })
 }
 
+//PS - Grab a single user
+getOneUser(id) {
+  console.log('bing!')
+  //PS - good ol' string literals
+  fetch(`/api/users/${id}/`)
+  //PS - make that shit json
+  .then(res => res.json())
+  //PS - put that shit where it belongs
+  .then(res => {
+    console.log('Data recieved:',res)
+    this.setState({
+      selectedUser: res.data
+    })
+  })
+  .then(()=>{
+    console.log('Current state:',this.state)
+  })
+}
+
+//PS - this sets the selected user back to null
+resetSelectedUser(){
+  this.setState({
+    selectedUser: null,
+  })
+}
+
 getMovies() {
   fetch('/api/movies/', {
     method: 'GET',
@@ -158,18 +187,19 @@ resetPreview() {
   render() {
     return (
       <div className="allcontainer">
-        <Nav logout={this.props.logout}/>
+        <Nav logout={this.props.logout} resetSelectedUser={this.resetSelectedUser} getOneUser={this.getOneUser} user={this.props.user}/>
           <div className="maincontainer">
              <div className="asidecontainer">
                 {this.state.usersLoaded ?
-                <UsersList usersList={this.state.usersList} />
+                <UsersList usersList={this.state.usersList} getOneUser={this.getOneUser}/>
                 : <p>Loading...</p> }
               </div>
               <div className="moviefeedcontainer">
                 {this.state.moviesLoaded ?
-                <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} />
+                <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} selectedUser={this.state.selectedUser} />
                 : <SingleMovie selectedMovie={this.state.selectedMovie}
                 selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} /> }
+
               </div>
               <div className="addmoviecontainer">
                 <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>

@@ -110,7 +110,7 @@ render() {
         <Route exact path='/' render={() => (
         this.state.auth
           ? <Redirect to='/main' />
-          : <Splash handleLoginSubmit={this.handleLoginSubmit}
+          : <Splash handleLoginSubmit={this.handleLoginSubmit} 
           handleRegisterSubmit={this.handleRegisterSubmit} getRegisterForm={this.getRegisterForm} getLoginForm={this.getLoginForm}
           currentPage={this.state.currentPage}/>
           ) }/>
@@ -132,7 +132,7 @@ render() {
         <Route exact path='/main' render={() => (
         !this.state.auth
         ? <Redirect to='/' />
-        : <Main logout={this.logout} />
+        : <Main user={this.state.user} logout={this.logout} />
         )} />
       </div>
      </Router>
