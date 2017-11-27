@@ -9,10 +9,9 @@ const AddMovie = (props) => {
           <input type="text" name="title" placeholder="movie title"/>
           <input type="submit" value="submit"/>
       </form>
-      <MoviePreview dataLoaded={props.dataLoaded} fetchedMovie={props.fetchedMovie}
-      fetchMovie={props.fetchMovie} postMovie={props.postMovie} />
+      <MoviePreview dataLoaded={props.dataLoaded} fetchedMovie={props.fetchedMovie} fetchMovie={props.fetchMovie} postMovie={props.postMovie} resetPreview={props.resetPreview} />
       </div>
-    </div>
+    </div >
     )
   }
 

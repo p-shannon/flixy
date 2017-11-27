@@ -3,11 +3,9 @@ import React from 'react'
 //AF - if no movie has been fetched, component will return an empty div; otherwise, it will rendered the fetched movie
 //AF - searching a new movie clears the previous movie
 const MoviePreview = props => {
-	if (props.dataLoaded !== true) {
+	if (!props.dataLoaded || !props.fetchedMovie.Title) {
 	return(
-		<div className="previewcontainer">
-
-		</div>
+		<div className="previewcontainer"></div>
 		)
 	} else {
 		//AF - click on 'add movie' to post movie to local db.
@@ -20,7 +18,8 @@ const MoviePreview = props => {
 				<p className="preview">Genre: {props.fetchedMovie.Genre}</p>
 				<p className="preview">Runtime: {props.fetchedMovie.Runtime}</p>
 				<p className="preview">Plot: {props.fetchedMovie.Plot}</p>
-				<div className="addmoviebutton" onClick={props.postMovie}>add movie</div>
+				<div className="previewmovie addmoviebutton" onClick={props.postMovie}>add movie</div>
+				<div className="previewmovie clearmoviebutton" onClick={props.resetPreview}>clear movie</div>
 			</div>
 		)
 	}

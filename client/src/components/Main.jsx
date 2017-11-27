@@ -21,6 +21,8 @@ class Main extends Component {
     selectedComments: [],
     selectedRatings: [],
     fetchedMovie: null,
+    user: this.props.user,
+    userPageLoaded: null,
     title: "",
     year: 0,
     poster: "",
@@ -37,6 +39,7 @@ class Main extends Component {
     this.getOneUser = this.getOneUser.bind(this);
     this.resetSelectedUser = this.resetSelectedUser.bind(this);
     this.singleMovie = this.singleMovie.bind(this);
+    this.resetPreview = this.resetPreview.bind(this);
   }
 
 componentDidMount() {
@@ -97,8 +100,11 @@ componentDidMount() {
         ratings:  this.state.ratings,
       })
     }).then(() => {
-      this.getMovies()
-      this.getOneUser()
+
+      {this.state.userPageLoaded === false
+      ? this.getMovies()
+      : this.getOneUser(this.props.user.id)}
+
       this.resetPreview()
     })
   }
@@ -121,7 +127,7 @@ getUsers() {
 //PS - Grab a single user
 //LN- set moviesLoaded to true whenever user gets clicked to ensure functionality throughout app
 getOneUser(id) {
-  console.log('bing!')
+  console.log('THIS IS WORKING bing!')
   //PS - good ol' string literals
   fetch(`/api/users/${id}/`)
   //PS - make that shit json
@@ -130,6 +136,7 @@ getOneUser(id) {
   .then(res => {
     console.log('Data recieved:',res)
     this.setState({
+      userPageLoaded: true,
       selectedUser: res.data,
       moviesLoaded: true,
     })
@@ -143,8 +150,10 @@ getOneUser(id) {
 resetSelectedUser(){
   this.setState({
     selectedUser: null,
+    userPageLoaded: false,
     moviesLoaded: true,
   })
+  this.getMovies()
 }
 
 getMovies() {
@@ -158,6 +167,7 @@ getMovies() {
     this.setState({
       moviesLoaded: true,
       movieFeed: res.data.movies,
+      userPageLoaded: false,
     })
   })
 }
@@ -184,6 +194,7 @@ singleMovie(id) {
 
 // AF - this function resets the preview window
 resetPreview() {
+  console.log('trying to reset')
   this.setState({
     dataLoaded: null,
     fetchedMovie: null,
@@ -209,8 +220,7 @@ resetPreview() {
 
               </div>
               <div className="addmoviecontainer">
-                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie}
-                dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>
+                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie} resetPreview={this.resetPreview}/>
               </div>
           </div>
       </div>
