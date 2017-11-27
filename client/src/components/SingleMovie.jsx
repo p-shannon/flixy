@@ -4,7 +4,6 @@ const SingleMovie = (props) => {
   console.log(props.selectedMovie)
   console.log(props.selectedComments)
   console.log(props.selectedRatings)
-  const ratings = props.selectedRatings[2]
 
   return (
     <div className="singlemovie">
@@ -14,7 +13,7 @@ const SingleMovie = (props) => {
         <h3>Genre: {props.selectedMovie.genre}</h3>
         <h2>{props.selectedMovie.plot}</h2>
         <h3>Rated: {props.selectedMovie.rated}</h3>
-        <h3>Reviews: {ratings}</h3>
+        <h3>Reviews: {props.selectedRatings}</h3>
         <div className="commentcontainer">
         {props.selectedComments.map(comment => {
           return (

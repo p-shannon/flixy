@@ -19,7 +19,7 @@ class Main extends Component {
     singleLoaded: false,
     dataLoaded: false,
     selectedComments: [],
-    selectedRatings: {},
+    selectedRatings: [],
     fetchedMovie: null,
     title: "",
     year: 0,
@@ -98,6 +98,7 @@ componentDidMount() {
       })
     }).then(() => {
       this.getMovies()
+      this.getOneUser()
       this.resetPreview()
     })
   }
@@ -118,6 +119,7 @@ getUsers() {
 }
 
 //PS - Grab a single user
+//LN- set moviesLoaded to true whenever user gets clicked to ensure functionality throughout app
 getOneUser(id) {
   console.log('bing!')
   //PS - good ol' string literals
@@ -128,10 +130,11 @@ getOneUser(id) {
   .then(res => {
     console.log('Data recieved:',res)
     this.setState({
-      selectedUser: res.data
+      selectedUser: res.data,
+      moviesLoaded: true,
     })
   })
-  .then(()=>{
+  .then(() => {
     console.log('Current state:',this.state)
   })
 }
@@ -140,6 +143,7 @@ getOneUser(id) {
 resetSelectedUser(){
   this.setState({
     selectedUser: null,
+    moviesLoaded: true,
   })
 }
 
@@ -158,6 +162,7 @@ getMovies() {
   })
 }
 
+// LN - Grab a single movie by ref id
 singleMovie(id) {
   fetch(`/api/movies/${id}`, {
     method: 'GET',
@@ -168,12 +173,14 @@ singleMovie(id) {
     this.setState({
       selectedMovie: res.data.movies.movie,
       selectedComments: res.data.movies.comments,
-      selectedRatings: JSON.stringify(res.data.movies.movie.ratings),
+      selectedRatings: res.data.movies.movie.ratings,
       singleLoaded: true,
       moviesLoaded: false,
+      usersLoaded: true,
     })
   })
 }
+
 
 // AF - this function resets the preview window
 resetPreview() {
@@ -202,7 +209,8 @@ resetPreview() {
 
               </div>
               <div className="addmoviecontainer">
-                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>
+                <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie}
+                dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie}/>
               </div>
           </div>
       </div>

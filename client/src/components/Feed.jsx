@@ -37,9 +37,10 @@ const Feed = (props) => {
       </div>
     )
   }
-  else{  
+  else{
     return (
       <div className="feedcontainer">
+      <h1>Flixy feed</h1>
       {props.movieFeed.map(movie => {
         return (
           <div className="moviecontainer" key={movie.id} onClick={() => {props.singleMovie(movie.id)}}>
