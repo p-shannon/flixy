@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleMovie from './SingleMovie';
+// import SingleMovie from './Single/Movie';
 
 const Feed = (props) => {
   //PS - if we received a selectedUser prop
@@ -18,7 +18,7 @@ const Feed = (props) => {
             return (
               <div className="moviecontainer" key={index} onClick={() => {props.singleMovie(post.id)}}>
                 <h1>{props.selectedUser.user.username}</h1>
-                <img src={post.poster} />
+                <img alt="" src={post.poster} />
                 <p>{post.title} ({post.year})</p>
               </div>
             )
@@ -45,7 +45,7 @@ const Feed = (props) => {
         return (
           <div className="moviecontainer" key={movie.id} onClick={() => {props.singleMovie(movie.id)}}>
           <h1>{movie.username}</h1>
-          <img src={movie.poster} />
+          <img alt="" src={movie.poster} />
           <p>{movie.title} ({movie.year})</p>
           </div>)
         })}
