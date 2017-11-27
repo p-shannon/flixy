@@ -172,6 +172,8 @@ getMovies() {
   })
 }
 
+
+//PS - I wish you named it differently, the reason is on line 220
 // LN - Grab a single movie by ref id
 singleMovie(id) {
   fetch(`/api/movies/${id}`, {
@@ -215,7 +217,7 @@ resetPreview() {
               <div className="moviefeedcontainer">
                 {this.state.moviesLoaded ?
                 <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} selectedUser={this.state.selectedUser} />
-                : <SingleMovie selectedMovie={this.state.selectedMovie}
+                : <SingleMovie singleMovie={this.singleMovie} selectedMovie={this.state.selectedMovie}
                 selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} /> }
 
               </div>
