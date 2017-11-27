@@ -10,7 +10,7 @@ class SingleMovie extends Component {
 		  console.log(props.selectedMovie)
   		console.log(props.selectedComments)
   		console.log(props.selectedRatings)
-  		
+
   		//PS - </shenanigans>
   		//PS - Handle the states for the form submissions
   		this.state = {
@@ -69,7 +69,7 @@ class SingleMovie extends Component {
 	        <h3>Genre: {this.props.selectedMovie.genre}</h3>
 	        <h2>{this.props.selectedMovie.plot}</h2>
 	        <h3>Rated: {this.props.selectedMovie.rated}</h3>
-	        <h3>Rotten Tomatoes: {props.selectedRatings}</h3>
+	        <h3>Rotten Tomatoes: {this.props.selectedRatings}</h3>
 	        <div className="commentcontainer">
 	        {this.props.selectedComments.map(comment => {
 	          return (
