@@ -1,5 +1,5 @@
 import React from 'react';
-// import SingleMovie from './Single/Movie';
+
 
 const Feed = (props) => {
   //PS - if we received a selectedUser prop

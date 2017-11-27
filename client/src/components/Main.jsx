@@ -166,6 +166,7 @@ getMovies() {
       moviesLoaded: true,
       movieFeed: res.data.movies,
       userPageLoaded: false,
+      singleLoaded: false,
     })
   })
 }
@@ -216,7 +217,7 @@ resetPreview() {
                 {this.state.moviesLoaded ?
                 <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} selectedUser={this.state.selectedUser} />
                 : <SingleMovie singleMovie={this.singleMovie} selectedMovie={this.state.selectedMovie}
-                selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} /> }
+                selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} user={this.state.user} singleLoaded={this.state.singleLoaded} /> }
 
               </div>
               <div className="addmoviecontainer">

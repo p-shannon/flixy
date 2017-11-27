@@ -63,26 +63,35 @@ class SingleMovie extends Component {
  	render(){
 	  return (
 	    <div className="singlemovie">
-	        <h1>{this.props.selectedMovie.title} ({this.props.selectedMovie.year})</h1>
-	        <img src={this.props.selectedMovie.poster} />
-	        <h3>Director: {this.props.selectedMovie.director}</h3>
-	        <h3>Genre: {this.props.selectedMovie.genre}</h3>
-	        <h2>{this.props.selectedMovie.plot}</h2>
-	        <h3>Rated: {this.props.selectedMovie.rated}</h3>
-	        <h3>Rotten Tomatoes: {this.props.selectedRatings}</h3>
+      {this.props.singleLoaded ? (
+          <div className="singlemoviecontent">
+	         <h1>{this.props.selectedMovie.title} ({this.props.selectedMovie.year})</h1>
+	         <img src={this.props.selectedMovie.poster} />
+	         <h3>Director: {this.props.selectedMovie.director}</h3>
+	         <h3>Genre: {this.props.selectedMovie.genre}</h3>
+	         <h2>{this.props.selectedMovie.plot}</h2>
+	         <h3>Rated: {this.props.selectedMovie.rated}</h3>
+	         <h3>Rotten Tomatoes: {this.props.selectedRatings}</h3>
 	        <div className="commentcontainer">
-	        {this.props.selectedComments.map(comment => {
-	          return (
-	            <h3 key={comment.id}>Comment: {comment.body}</h3>
-	            )
-	          })
-	        }
-	        <form id="newcommentform" onSubmit={(e)=>{this.handleSubmission(e, this.props.selectedMovie.id)}}>
-	        	<textarea placeholder="Write a comment!" onChange={(e)=>{this.handleChanges(e)}} value={this.state.comment}/>
-	        	<input type="submit" value="Post!"/>
-	        </form>
-	        </div>
-	    </div>
+	         {this.props.selectedComments.map(comment => {
+	           return (
+	             <h3 key={comment.id}>{this.props.user.username}: {comment.body}</h3>
+	              )
+	           })
+	         }
+	         <form id="newcommentform" onSubmit={(e)=>{this.handleSubmission(e, this.props.selectedMovie.id)}}>
+	        	  <textarea placeholder="Write a comment!" onChange={(e)=>{this.handleChanges(e)}} value={this.state.comment}/>
+	        	  <input type="submit" value="Post!"/>
+	         </form>
+	         </div>
+          </div>
+          )
+      : (
+        <div className="emptyreturn">
+          <p> </p>
+        </div>
+      ) }
+      </div>
 	    )
 	}
 }
