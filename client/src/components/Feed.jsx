@@ -16,7 +16,7 @@ const Feed = (props) => {
           //PS - if the post doesn't have a body, then it's a movie, treat it like one.
           if(!post.body){
             return (
-              <div className="moviecontainer" key={index} onClick={() => {props.singleMovie(movie.id)}}>
+              <div className="moviecontainer" key={index} onClick={() => {props.singleMovie(post.id)}}>
                 <h1>{props.selectedUser.user.username}</h1>
                 <img src={post.poster} />
                 <p>{post.title} ({post.year})</p>
