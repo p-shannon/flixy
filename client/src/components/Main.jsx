@@ -40,6 +40,7 @@ class Main extends Component {
     this.resetSelectedUser = this.resetSelectedUser.bind(this);
     this.singleMovie = this.singleMovie.bind(this);
     this.resetPreview = this.resetPreview.bind(this);
+    this.getMovies = this.getMovies.bind(this);
   }
 
 componentDidMount() {
@@ -217,7 +218,7 @@ resetPreview() {
                 {this.state.moviesLoaded ?
                 <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} selectedUser={this.state.selectedUser} />
                 : <SingleMovie resetSelectedUser={this.resetSelectedUser} singleMovie={this.singleMovie} selectedMovie={this.state.selectedMovie}
-                user={this.props.user} selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} singleLoaded={this.state.singleLoaded} /> }
+                user={this.props.user} selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} singleLoaded={this.state.singleLoaded} getMovies={this.getMovies} /> }
               </div>
               <div className="addsubmitmoviecontainer">
                 <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie} resetPreview={this.resetPreview}/>

@@ -23,14 +23,14 @@ class SingleMovie extends Component {
   		this.deleteMovie = this.deleteMovie.bind(this)
 	}
 
-	//PS - Needed for auto focusing the 
+	//PS - Needed for auto focusing the
 	componentDidUpdate(){
 		console.log('ding!')
 		console.log(this.state.selectedComment)
 		if(!(this.state.selectedComment===null)){
 			console.log('bing!')
 			document.querySelector('#editcommentform textarea').focus()
-		}    			
+		}
 	}
 
 	//PS - handle the changes in the edit comment component box
@@ -104,7 +104,7 @@ class SingleMovie extends Component {
 		//PS - Keep workin' that glorious backend.
 		fetch(`/api/comments/${id}`,{
 			method: 'DELETE',
-			credentials: 'include',	
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -120,7 +120,7 @@ class SingleMovie extends Component {
 		//PS - delete all comments from the movie...
 		fetch(`/api/comments/all/movie/${id}`,{
 			method: 'DELETE',
-			credentials: 'include',	
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -129,7 +129,7 @@ class SingleMovie extends Component {
 			console.log('the value of id is',id)
 			fetch(`/api/movies/${id}`,{
 			method: 'DELETE',
-			credentials: 'include',	
+			credentials: 'include',
 			headers: {
 				'Content-Type': 'application/json'
 			},
@@ -162,7 +162,7 @@ class SingleMovie extends Component {
 	decideIfDeleteable(){
 		if(this.props.user.id === this.props.selectedMovie.user_id){
 			return(
-				<h3 id="deletemovie" onClick={() => {this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</h3> 
+				<h3 id="deletemovie" onClick={() => {this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</h3>
 			)
 		}
 		else{
@@ -179,7 +179,7 @@ class SingleMovie extends Component {
 	        <div className="singlemovieall">
 	         <h1>{this.props.selectedMovie.title} ({this.props.selectedMovie.year})</h1>
            <div className="singlemoviecontainer">
-	         <img src={this.props.selectedMovie.poster} />
+	         <img onClick={this.props.getMovies} src={this.props.selectedMovie.poster} />
            <div className='singlemovietext'>
 	         <h3>Genre: {this.props.selectedMovie.genre}</h3>
            <h3>Director: {this.props.selectedMovie.director} </h3>
@@ -191,9 +191,9 @@ class SingleMovie extends Component {
 	        <div className="commentcontainer">
             <h2>Comments</h2>
 	        {this.props.selectedComments.map(comment => {
-			//PS - I know there's a better way to do this, I just don't know how to do it...    
+			//PS - I know there's a better way to do this, I just don't know how to do it...
 			    //PS - If the current user matches the comment's user id, we're going to put the onclick listener on the comments...
-			    if(this.props.user.id === comment.user_id){    
+			    if(this.props.user.id === comment.user_id){
 			        //PS - If nothing's selected...
 			        if(!this.state.selectedComment){
 			        	//PS - post the comment, wait for clicks...

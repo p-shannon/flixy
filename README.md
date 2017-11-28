@@ -28,7 +28,7 @@ We have a full CRUD express backend that uses a database built in Postgres. <br>
 Our local movie information comes from the OMDB API. Our application queries this database and then posts this information to our local database depending on user interaction.
 <br>
 
-**AUTHENTICATION:** <br>
+**Authentication:** <br>
 Users have to log in to use Flixy, however, they can only edit/update/delete their own posts.
 
 ## **Installation instructions**
@@ -114,7 +114,7 @@ Originally, we intended to incorporate a 'like' or 'voting' system. If we were t
 We would also like to to create some sort of system that deals with 'repeat movies'. For example, we considered warning the user if they're adding a movie that already exists in the database so that they could choose to 'add it anyway' or 'navigate to that film'. Another solution would be to just add an instance of the movie to their individual profile, rather than adding it to the database for a second time. In this case, we might also lift that movie to the top of the feed with a note about when it was originally posted.<br><br>
 Another major change we would make, would be to turn Flixy into an app with multiple rooms so that groups of friends can be isolated from users they don't know, similar to a Slack workspace.
 
-## **STYLE GUIDE**
+## **Style Guide**
 - comments written before functions and begin with initials ex. //AF - send information to database
 - database tables all lowercase
 - neutral color scheme
