@@ -3,14 +3,14 @@
 
 ## Table of Contents
 
-- [Explanation of technologies used](#technologies-used)
+- [Explanation of technologies used](#explanation-of-technologies-used)
 - [Installaltion instructions](#installation-instructions)
 - [Our approach](#our-approach)
-- [Key](#key)
+- [Key](#key-)
 - [User story](#user-story)
-- [Wireframes](#wire-frames)
-- [ERDS](#ERDS)
-- [Unsolved problems & hurdles](#unsolved-problems)
+- [Wireframes](#wireframes)
+- [ERDS](#erds)
+- [Unsolved problems and hurdles](#unsolved-problems--hurdles)
 - [Style guide](#style-guide)
 
 
@@ -31,13 +31,13 @@ Our local movie information comes from the OMDB API. Our application queries thi
 **Authentication:** <br>
 Users have to log in to use Flixy, however, they can only edit/update/delete their own posts.
 
-## **Installation instructions**
+## **Installation instructions:**
 Yarn install all dependencies<br>
 Yarn dev to start the express server<br>
 Yarn start to begin the react client<br>
 App requires an API key from OMDB API<br>
 
-## **Our approach**
+## **Our approach:**
 Our approach had two major phases: planning and building. The planning stage, while challenging at times, was crucial to our teams ability to work on separate features and merge them seamlessly.
 
 Planning:<br>
@@ -46,7 +46,7 @@ Initially, we sought to find a common interest within the group. After agreeing 
 Building:<br>
 We all wanted to have a hand in development, so we divided up the backend work. We also benefitted from a lot of peer-programming and screensharing in order to work through some of the tougher issues together.
 
-## **KEY:** <br>
+## **Key:** <br>
 - **FLIXSTERS:** side nav with all users listed who have signed up. Each username links to the user's profile<br>
 - **FLIXY FEED:** list of all movies in the Flixy database regardless of user<br>
 - **ADD MOVIE:** the search bar in this component queries an external movie database. This information is then posted to the local database.<br>
@@ -57,29 +57,29 @@ We all wanted to have a hand in development, so we divided up the backend work. 
 ## **User story:**
 
 **1) LANDING PAGE**<br>
--Upon arrival, the user can select one of two options: LOGIN or REGISTER. 
--Depending on which option they choose, a form will display prompting them to enter their credentials or register. 
--On submit the user is redirected to the homepage.
+- Upon arrival, the user can select one of two options: LOGIN or REGISTER. 
+- Depending on which option they choose, a form will display prompting them to enter their credentials or register. 
+- On submit the user is redirected to the homepage.
 
 **2) HOME PAGE**<br>
--User logs in and sees a screen divided into three panels: FLIXSTERS, FLIXY FEED, and ADD MOVIE<br>
--The user can navigate to their own PROFILE, back to the FLIXY FEED, or LOGOUT from the navbar across the top of the screen<br>
--To the left, below FLIXTERS, the user will find a list of all other users. If the user clicks on one of those usernames, the center component re-renders and displays that user's activity (comments and posts)<br>
--In the center, the user will see the FLIXY FEED which lists all movies added by any using in ascending order by post time<br>
--To the right, the user sees the ADD MOVIE section. Here the user can search an external movie database for a movie, preview the movie information, and decide whether or not to add it to the general feed and to their profile<br>
+- User logs in and sees a screen divided into three panels: FLIXSTERS, FLIXY FEED, and ADD MOVIE<br>
+- The user can navigate to their own PROFILE, back to the FLIXY FEED, or LOGOUT from the navbar across the top of the screen<br>
+- To the left, below FLIXTERS, the user will find a list of all other users. If the user clicks on one of those usernames, the center component re-renders and displays that user's activity (comments and posts)<br>
+- In the center, the user will see the FLIXY FEED which lists all movies added by any using in ascending order by post time<br>
+- To the right, the user sees the ADD MOVIE section. Here the user can search an external movie database for a movie, preview the movie information, and decide whether or not to add it to the general feed and to their profile<br>
 
 **3) ANOTHER FLIXTER'S PROFILE (Not the user logged in someone else's profile)**<br>
--Has three views, FLIXSTERS, USER2 FEED and ADD MOVIE<br>
--User1 can view all the movies added by User2 in their UserFeed<br>
--User can click on movies in the user feed to either like or comment or read more<br>
+- Has three views, FLIXSTERS, USER2 FEED and ADD MOVIE<br>
+- User1 can view all the movies added by User2 in their UserFeed<br>
+- User can click on movies in the user feed to either like or comment or read more<br>
 
 **4) USER PROFILE (Logged in user's profile page)**<br>
--When a user clicks PROFILE, the center display component will re-render and display only that user's own activity (comments and posts).
+- When a user clicks PROFILE, the center display component will re-render and display only that user's own activity (comments and posts).
 
 **5) SINGLE VIEW**<br>
--At any point, the user can find out more information about a movie by clicking on it.
--When the user clicks on a movie, the center component will re-render and display a single view of the movie, more information, as well as all of the comments left by any user.
--In order to navigate out of the single view, the usercan click on FLIXYFEED, PROFILE, or any of the FLIXTERS usernames.
+- At any point, the user can find out more information about a movie by clicking on it.
+- When the user clicks on a movie, the center component will re-render and display a single view of the movie, more information, as well as all of the comments left by any user.
+- In order to navigate out of the single view, the usercan click on FLIXYFEED, PROFILE, or any of the FLIXTERS usernames.
 
 ## **Wireframes**
 OVERVIEW:
