@@ -89,7 +89,7 @@ commentController.delete = (req,res) => {
 	.then(comment => {
 		//PS - then, if the comment's user ID is equal to the current user's id, destroy it
 		if(comment.user_id === req.user.id){
-			Comment.delete(req.params)
+			Comment.delete(req.params.id)
 			.then(() => {
 				res.status(200).json({
 					message: 'Comment Deleted successfully',

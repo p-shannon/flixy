@@ -98,9 +98,11 @@ movieController.update = (req, res, next) => {
 movieController.delete = (req, res) => {
   //PS - First, grab the movie
   Movie.findById(req.params.id)
-  .then(movie => {
+  .then(data => {
+    console.log(`Current user = ${req.user.id}`)
+    console.log(`movie's user_id = ${data.movie.user_id}`)
     //PS - Then, if the movie's user id matches the current user's
-    if(movie.user_id === req.user.id){
+    if(data.movie.user_id === req.user.id){
       //PS - BLOW IT THE FUCK UP
       Movie.destroy(req.params.id)
       .then(() => {
@@ -116,10 +118,10 @@ movieController.delete = (req, res) => {
     else{
       res.status(403).json({
         message: 'Not allowed to delete other\'s movies.'
-      }).catch(err => {
+      })/*.catch(err => {
         console.log(err);
         res.status(500).json({error: err});
-      })
+      })*/
     }
   }).catch(err => {
   console.log(err);

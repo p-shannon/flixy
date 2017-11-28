@@ -12,14 +12,14 @@ const MoviePreview = props => {
 		//AF - adding movie clears the preview field
 		return(
 			<div className="previewcontainer">
-				<img className="posterpreview" alt="" src={props.fetchedMovie.Poster}/>
 				<p className="preview">{props.fetchedMovie.Title} ({props.fetchedMovie.Year})</p>
+				<img className="posterpreview" alt="" src={props.fetchedMovie.Poster}/>
 				<p className="preview">Director: {props.fetchedMovie.Director}</p>
 				<p className="preview">Genre: {props.fetchedMovie.Genre}</p>
 				<p className="preview">Runtime: {props.fetchedMovie.Runtime}</p>
 				<p className="preview">Plot: {props.fetchedMovie.Plot}</p>
-				<div className="previewmovie addmoviebutton" onClick={props.postMovie}>add movie</div>
-				<div className="previewmovie clearmoviebutton" onClick={props.resetPreview}>clear movie</div>
+				<button className="previewmovie addmoviebutton" onClick={props.postMovie}>Add Movie</button>
+				<button className="previewmovie clearmoviebutton" onClick={props.resetPreview}>Clear Movie</button>
 			</div>
 		)
 	}

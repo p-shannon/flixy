@@ -29,6 +29,7 @@ Movie.findById = id => {
     FROM movies join users on (movies.user_id = users.id) WHERE movies.id = $1`, [id])
   //PS - Then send it down the next layer...
   .then(movie => {
+    console.log(JSON.stringify(movie))
     //PS - grab all comments for the movie...
     return db.query('select * from comments where movie_id = $1 order by timestamp ASC', [id])
     //PS - Then pass that down to the next layer (movie is still in scope)

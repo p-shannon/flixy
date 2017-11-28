@@ -172,7 +172,7 @@ getMovies() {
 }
 
 
-//PS - I wish you named it differently, the reason is on line 220
+//PS - I wish you named it differently, the reason is on line 218
 // LN - Grab a single movie by ref id
 singleMovie(id) {
   fetch(`/api/movies/${id}`, {
@@ -216,11 +216,10 @@ resetPreview() {
               <div className="moviefeedcontainer">
                 {this.state.moviesLoaded ?
                 <Feed movieFeed={this.state.movieFeed} singleMovie={this.singleMovie} selectedUser={this.state.selectedUser} />
-                : <SingleMovie singleMovie={this.singleMovie} selectedMovie={this.state.selectedMovie}
-                selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} user={this.state.user} singleLoaded={this.state.singleLoaded} /> }
-
+                : <SingleMovie resetSelectedUser={this.resetSelectedUser} singleMovie={this.singleMovie} selectedMovie={this.state.selectedMovie}
+                user={this.props.user} selectedComments={this.state.selectedComments} selectedRatings={this.state.selectedRatings} singleLoaded={this.state.singleLoaded} /> }
               </div>
-              <div className="addmoviecontainer">
+              <div className="addsubmitmoviecontainer">
                 <AddMovie fetchMovie={this.fetchMovie} postMovie={this.postMovie} dataLoaded={this.state.dataLoaded} fetchedMovie={this.state.fetchedMovie} resetPreview={this.resetPreview}/>
               </div>
           </div>
