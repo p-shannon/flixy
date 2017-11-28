@@ -136,7 +136,7 @@ class SingleMovie extends Component {
 			})
 		})
 		//PS - then take us back the flixy feed
-		.then(()=>{
+		.then(() => {
 			console.log('it\'s done...')
 			this.props.resetSelectedUser()
 		})
@@ -162,7 +162,7 @@ class SingleMovie extends Component {
 	decideIfDeleteable(){
 		if(this.props.user.id === this.props.selectedMovie.user_id){
 			return(
-				<h3 id="deletemovie" onClick={()=>{this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</h3> 
+				<h3 id="deletemovie" onClick={() => {this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</h3> 
 			)
 		}
 		else{
@@ -198,7 +198,7 @@ class SingleMovie extends Component {
 			        if(!this.state.selectedComment){
 			        	//PS - post the comment, wait for clicks...
 			          	return (
-			            	<h3 key={comment.id}> {this.props.user.username}: {comment.body} <span onClick={()=>{this.selectComment(comment)}}>edit</span> <span onClick={()=>{this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
+			            	<h3 key={comment.id}> {this.props.user.username}: {comment.body} <span onClick={() => {this.selectComment(comment)}}>edit</span> <span onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
 			            )
 			        }
 			        //PS - if something's selected and it's us...
@@ -206,8 +206,8 @@ class SingleMovie extends Component {
 			        	//PS - show the edit form
 			        	return (
 			        		<div className="formcontainer">
-			        		<form id="editcommentform" onSubmit={(e)=>{this.handleEditSubmission(e, comment.id, this.props.selectedMovie.id)}}>
-		        				<textarea name="comment" onKeyDown={(e)=>{if(e.keyCode === 27){this.deselectComment()}}} onChange={(e)=>{this.handleChanges(e)}} value={this.state.comment}/>
+			        		<form id="editcommentform" onSubmit={(e) => {this.handleEditSubmission(e, comment.id, this.props.selectedMovie.id)}}>
+		        				<textarea name="comment" onKeyDown={(e) => {if(e.keyCode === 27){this.deselectComment()}}} onChange={(e) => {this.handleChanges(e)}} value={this.state.comment}/>
 		        				<input type="submit" value="Post!"/>
 		        			</form>
 		        			</div>
@@ -216,7 +216,7 @@ class SingleMovie extends Component {
 			        //PS - else, wait for clicks...
 			        else{
 			        	return (
-			            	<h3 key={comment.id}>{this.props.user.username}: {comment.body} <span onClick={()=>{this.selectComment(comment)}}>edit</span> <span onClick={()=>{this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
+			            	<h3 key={comment.id}>{this.props.user.username}: {comment.body} <span onClick={() => {this.selectComment(comment)}}>edit</span> <span onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
 			            )
 			        }
 			    }
@@ -230,13 +230,14 @@ class SingleMovie extends Component {
 	          })
 	        }
 	        <div className="formcontainer">
-	        <form id="newcommentform" onSubmit={(e)=>{this.handleSubmission(e, this.props.selectedMovie.id)}}>
-	        	<textarea name="newComment" placeholder="Write a comment!" onClick={this.deselectComment} onChange={(e)=>{this.handleChanges(e)}} value={this.state.newComment}/>
+	        <form id="newcommentform" onSubmit={(e) => {this.handleSubmission(e, this.props.selectedMovie.id)}}>
+	        	<textarea name="newComment" placeholder="Write a comment!" onClick={this.deselectComment} onChange={(e) => {this.handleChanges(e)}} value={this.state.newComment}/>
 	        	<input type="submit" value="Post!"/>
 	        </form>
 	        </div>
 	        </div>
 	        </div>
+	    </div>
 	    </div>
 	    )
 	}

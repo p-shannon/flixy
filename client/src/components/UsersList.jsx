@@ -8,7 +8,7 @@ const UsersList = (props) => {
     <div className="userslistcontainer">
       {props.usersList.map(user => {
       return  (
-          <div className="userslist" key={user.id} onClick={()=>{props.getOneUser(user.id)}}>{user.username}</div>
+          <div className="userslist" key={user.id} onClick={() => {props.getOneUser(user.id)}}>{user.username}</div>
         )})}
     </div>
   </div>
