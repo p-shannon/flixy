@@ -162,7 +162,7 @@ class SingleMovie extends Component {
 	decideIfDeleteable(){
 		if(this.props.user.id === this.props.selectedMovie.user_id){
 			return(
-				<h3 id="deletemovie" onClick={() => {this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</h3>
+				<button id="deletemovie" onClick={() => {this.deleteMovie(this.props.selectedMovie.id)}}>Delete Movie</button>
 			)
 		}
 		else{
@@ -198,7 +198,7 @@ class SingleMovie extends Component {
 			        if(!this.state.selectedComment){
 			        	//PS - post the comment, wait for clicks...
 			          	return (
-			            	<h3 key={comment.id}> {this.props.user.username}: {comment.body} <span onClick={() => {this.selectComment(comment)}}>edit</span> <span onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
+			            	<h3 key={comment.id}> {this.props.user.username}: {comment.body} <button onClick={() => {this.selectComment(comment)}}>Edit</button> <button onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>Delete</button></h3>
 			            )
 			        }
 			        //PS - if something's selected and it's us...
@@ -216,7 +216,8 @@ class SingleMovie extends Component {
 			        //PS - else, wait for clicks...
 			        else{
 			        	return (
-			            	<h3 key={comment.id}>{this.props.user.username}: {comment.body} <span onClick={() => {this.selectComment(comment)}}>edit</span> <span onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>delete</span></h3>
+			            	<h3 key={comment.id}>{this.props.user.username}: {comment.body}
+                    <button onClick={() => {this.selectComment(comment)}}>Edit</button> <button onClick={() => {this.deleteComment(comment.id,comment.movie_id)}}>Delete</button></h3>
 			            )
 			        }
 			    }

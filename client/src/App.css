@@ -50,6 +50,20 @@ border-spacing: 0;
   text-align: center;
   font-family: 'Barlow Condensed', sans-serif;
   background-color: rgba(130, 132, 155, 0.33);
+  width: 100%;
+  height: 100%;
+}
+
+body, #root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+.splash h1 {
+  font-size: 200px;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 5px white;
 }
 
 .navcontainer {
@@ -206,7 +220,6 @@ border-spacing: 0;
 .commentcontainer {
   display: flex;
   flex-direction: column;
-  padding: 2px;
   border-top: 2px solid black;
 }
 
@@ -215,6 +228,8 @@ border-spacing: 0;
   letter-spacing: .1em;
   font-size: 20px;
   text-transform: uppercase;
+  margin-bottom: 9px;
+  margin-top: 3px;
 }
 
 .formcontainer form {
@@ -264,3 +279,22 @@ border-spacing: 0;
   overflow: none;
   overflow-wrap: normal;
 }
+
+.commentcontainer button {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  border-radius: 20%;
+  border: none;
+  box-shadow: 0 0 2px #000;
+  background: rgba(130, 132, 155, .01);
+}
+
+.commentcontainer h3 {
+  font-size: 18px;
+  padding: 0px 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
